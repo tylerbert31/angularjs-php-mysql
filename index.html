@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        >
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body ng-app="form_app">
+        <div class="wrapper m-0 w-100 h-100">
+            <div style="min-width: 300px;" class="container w-25 d-md-0 h-50 border border-secondary m-5 mx-auto d-flex justify-content-center align-items-center rounded ">
+                <form ng-controller="form_controller" class="d-flex flex-column m-3 w-75 justify-content-center align-items-center mx-auto form-group ">
+                    <div class="alert alert-danger" role="alert" ng-if="warning">
+                        <strong>Oops!</strong>
+                        You missed a few details of your product.
+                    </div>
+                    <div class="alert alert-success" role="alert" ng-if="success">
+                        <strong>Success!</strong>
+                        Product has been added.
+                    </div>
+                    <label for="productname">Product Name:</label>
+                    <input
+                        id="productname"
+                        type="text"
+                        name="product_name"
+                        class="form-control"
+                        ng-model="productname"
+                        ng-bind="productname"
+                        ng-click="resetError()"
+                        required
+                    >
+                    <br>
+                    <label for="quantity"> Quantity:</label>
+                    <input
+                        id="quantity"
+                        type="number"
+                        name="quantity"
+                        class="form-control"
+                        ng-model="quantity"
+                        ng-bind="quantity"
+                        ng-click="resetError()"
+                        max="500"
+                        required
+                    >
+                    <br>
+                    <label for="price">Price:</label>
+                    <input
+                        id="price"
+                        type="number"
+                        name="price"
+                        class="form-control"
+                        ng-model="price"
+                        ng-bind="price"
+                        ng-click="resetError()"
+                        max="500"
+                        required
+                    >
+                    <br>
+                    <label for="sold">Sold:</label>
+                    <input
+                        id="sold"
+                        type="number"
+                        name="sold"
+                        class="form-control"
+                        ng-model="sold"
+                        ng-bind="sold"
+                        ng-click="resetError()"
+                        max="9999"
+                        required
+                    >
+                    <br>
+                    <button id="submit" ng-click="onSubmit()" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div id="products" class="d-flex justify-content-center">
+                <table class="table table-bordered w-75" ng-controller="form_controller">
+                    <thead>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Sold</th>
+                        <th>Price</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="product in products | orderBy: sort">
+                            <td ng-bind="product.product_id"></td>
+                            <td ng-bind="product.prod_name"></td>
+                            <td ng-bind="product.quantity"></td>
+                            <td ng-bind="product.sold"></td>
+                            <td ng-bind="product.price"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+            <script src="form_app.js"></script>
+        </body>
+    </body>
